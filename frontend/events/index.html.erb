@@ -1,0 +1,12 @@
+<h1 class="text-3xl font-semibold mb-4 text-dark-blue">Upcoming Events</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <% @events.each do |event| %>
+    <div class="bg-very-light-gray p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="text-xl font-bold text-dark-blue"><%= event.name %></h2>
+      <p class="text-light-gray-blue"><%= event.date.strftime("%b %d, %Y") %> @ <%= event.venue %></p>
+      <p class="mt-2">Spots left: <%= event.spots_left %></p>
+      <%= link_to 'View Details', event_path(event), class: "mt-3 inline-block px-4 py-2 bg-dark-blue text-white rounded hover:bg-light-gray-blue" %>
+    </div>
+  <% end %>
+</div>

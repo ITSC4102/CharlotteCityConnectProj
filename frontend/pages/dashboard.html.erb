@@ -1,0 +1,15 @@
+<h1 class="text-3xl font-bold mb-4">My Schedule</h1>
+
+<% if @user_events.any? %>
+  <div class="space-y-4">
+    <% @user_events.each do |event| %>
+      <div class="bg-very-light-gray p-4 rounded shadow">
+        <h2 class="text-xl font-bold text-dark-blue"><%= event.name %></h2>
+        <p><%= event.date.strftime("%b %d, %Y") %> - <%= event.venue %></p>
+        <p>Estimated travel: <%= event.travel_time %> mins</p>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-light-gray-blue">You haven’t RSVP’d to any events yet. <%= link_to 'Browse Events', events_path, class: "text-red underline" %></p>
+<% end %>

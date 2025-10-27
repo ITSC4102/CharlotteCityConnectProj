@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --dark-blue: #2B2D42;
+  --light-gray-blue: #8D99AE;
+  --very-light-gray: #EDF2F4;
+  --red: #EF233C;
+  --dark-red: #D90429;
+}
+
+.bg-dark-blue { background-color: var(--dark-blue); }
+.text-dark-blue { color: var(--dark-blue); }
+
+.bg-light-gray-blue { background-color: var(--light-gray-blue); }
+.text-light-gray-blue { color: var(--light-gray-blue); }
+
+.bg-very-light-gray { background-color: var(--very-light-gray); }
+.text-very-light-gray { color: var(--very-light-gray); }
+
+.bg-red { background-color: var(--red); }
+.text-red { color: var(--red); }
+
+.bg-dark-red { background-color: var(--dark-red); }
+.text-dark-red { color: var(--dark-red); }

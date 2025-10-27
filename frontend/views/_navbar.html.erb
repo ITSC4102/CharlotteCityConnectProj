@@ -1,0 +1,14 @@
+<nav class="bg-white shadow p-4 rounded mb-6 flex justify-between items-center">
+  <div class="text-2xl font-bold text-dark-blue">Charlotte City Connect</div>
+  <div class="space-x-4">
+    <%= link_to 'Home', root_path, class: "hover:text-red underline" %>
+    <%= link_to 'Events', events_path, class: "hover:text-red underline" %>
+    <%= link_to 'My Schedule', dashboard_path, class: "hover:text-red underline" %>
+    <% if user_signed_in? %>
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "hover:text-red underline" %>
+    <% else %>
+      <%= link_to 'Login', new_user_session_path, class: "hover:text-red underline" %>
+    <% end %>
+  </div>
+</nav>
+

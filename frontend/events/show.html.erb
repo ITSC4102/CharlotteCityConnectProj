@@ -1,0 +1,10 @@
+<h1 class="text-3xl font-bold mb-2 text-dark-blue"><%= @event.name %></h1>
+<p class="text-light-gray-blue mb-2"><%= @event.date.strftime("%b %d, %Y") %> @ <%= @event.venue %></p>
+<p class="text-light-gray-blue mb-4">Spots left: <%= @event.spots_left %></p>
+<p class="mb-4"><%= @event.description %></p>
+
+<% if user_signed_in? %>
+  <%= button_to 'RSVP', rsvp_event_path(@event), method: :post, class: "px-4 py-2 bg-red text-white rounded hover:bg-dark-red" %>
+<% else %>
+  <p class="text-red">Please log in to RSVP.</p>
+<% end %>
