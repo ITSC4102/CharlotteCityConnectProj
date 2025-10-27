@@ -14,3 +14,4 @@ class EventsController < ApplicationController
     redirect_to event_path(params[:id]), notice: "RSVP successful!"
   end
 end
+
