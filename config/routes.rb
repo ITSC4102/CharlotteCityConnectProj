@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  # Homepage
-  root "pages#home"
+  get "home/index"
+  get "users/new"
+  get "users/create"
+  get "events/index"
+  get "events/show"
+  root "home#index"
 
-  # Dashboard / personal schedule
-  get "dashboard", to: "pages#dashboard"
-
-  # Events pages
-  resources :events do
-    post "rsvp", on: :member   # for RSVP button
-  end
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+  get '/signup', to: 'users#new'
+  post '/users', to: 'users#create'
+  resources :events, only: [:index, :show]
+  # your other routes here
 end
-
-
-

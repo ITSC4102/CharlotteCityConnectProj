@@ -1,0 +1,22 @@
+<h2 class="text-2xl font-bold mb-4 text-center">Create Your Account</h2>
+
+<%= form_with model: @user, url: users_path, local: true do |form| %>
+  <div class="mb-4">
+    <%= form.label :name, class: "block font-semibold mb-1" %>
+    <%= form.text_field :name, class: "w-full border rounded px-3 py-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :email, class: "block font-semibold mb-1" %>
+    <%= form.email_field :email, class: "w-full border rounded px-3 py-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :password, class: "block font-semibold mb-1" %>
+    <%= form.password_field :password, class: "w-full border rounded px-3 py-2" %>
+  </div>
+
+  <div class="text-center">
+    <%= form.submit "Sign Up", class: "px-6 py-2 bg-green-600 text-white rounded hover:bg-green-500" %>
+  </div>
+<% end %>

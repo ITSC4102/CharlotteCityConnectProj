@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Charlotte City Connect</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true %>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <%= link_to 'Home', root_path %> |
+        <%= link_to 'Browse Events', events_path %> |
+        <%= link_to 'Log In', login_path %> |
+        <%= link_to 'Sign Up', signup_path %>
+      </nav>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Charlotte City Connect. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

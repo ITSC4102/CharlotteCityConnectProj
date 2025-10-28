@@ -1,0 +1,40 @@
+<!-- Navigation bar -->
+<nav style="display: flex; justify-content: flex-end; padding: 1rem; background-color: #004aad;">
+  <%= link_to 'Log In', login_path, style: "color: white; margin-right: 1rem; text-decoration: none; font-weight: bold;" %>
+  <%= link_to 'Sign Up', signup_path, style: "color: white; text-decoration: none; font-weight: bold;" %>
+</nav>
+
+<div class="home-container" style="font-family: 'Segoe UI', Roboto, sans-serif; padding: 2rem; max-width: 1200px; margin: auto;">
+
+  <!-- Hero Section -->
+  <section class="hero" style="text-align: center; margin-bottom: 3rem;">
+    <h1 style="font-size: 3rem; color: #004aad; margin-bottom: 1rem;">Welcome to Charlotte City Connect</h1>
+    <p style="font-size: 1.25rem; color: #555; margin-bottom: 2rem;">
+      Discover local events, RSVP with ease, and never miss out on the fun in Charlotte!
+    </p>
+    <%= link_to 'Browse Events', events_path, style: "padding: 0.8rem 2rem; background-color: #004aad; color: white; border-radius: 6px; text-decoration: none; font-weight: bold;" %>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works" style="display: flex; flex-wrap: wrap; justify-content: space-around; text-align: center; gap: 2rem;">
+    <div class="step" style="flex: 1 1 250px; background-color: #f0f4f8; padding: 2rem; border-radius: 10px;">
+      <h2 style="color: #004aad; font-size: 1.5rem; margin-bottom: 1rem;">Find Events</h2>
+      <p>Browse a curated list of events happening around Charlotte.</p>
+    </div>
+    <div class="step" style="flex: 1 1 250px; background-color: #f0f4f8; padding: 2rem; border-radius: 10px;">
+      <h2 style="color: #004aad; font-size: 1.5rem; margin-bottom: 1rem;">RSVP Easily</h2>
+      <p>Sign up for events in just a few clicks and add them to your calendar.</p>
+    </div>
+    <div class="step" style="flex: 1 1 250px; background-color: #f0f4f8; padding: 2rem; border-radius: 10px;">
+      <h2 style="color: #004aad; font-size: 1.5rem; margin-bottom: 1rem;">Stay Connected</h2>
+      <p>Get reminders and stay up to date with your favorite events.</p>
+    </div>
+  </section>
+
+  <!-- Footer Call-to-Action -->
+  <section class="cta-footer" style="text-align: center; margin-top: 4rem;">
+    <p style="font-size: 1.2rem; margin-bottom: 1rem;">Ready to explore events in Charlotte?</p>
+    <%= link_to 'Browse Events Now', events_path, style: "padding: 0.8rem 2rem; background-color: #ff4d4f; color: white; border-radius: 6px; text-decoration: none; font-weight: bold;" %>
+  </section>
+  
+</div>
