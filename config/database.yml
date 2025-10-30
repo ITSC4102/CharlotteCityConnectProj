@@ -2,13 +2,23 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV["DATABASE_URL"] %>
 
 development:
   <<: *default
+  host: aws-1-us-east-1.pooler.supabase.com
+  port: 5432
+  database: postgres
+  username: postgres.eggagnxiurvlcgnvjkrd
+  password: 96gOEhPzwar5Cnfm
 
 test:
   <<: *default
+  database: test_postgres
 
 production:
   <<: *default
+  host: aws-1-us-east-1.pooler.supabase.com
+  port: 5432
+  database: postgres
+  username: postgres.eggagnxiurvlcgnvjkrd
+  password: 96gOEhPzwar5Cnfm
