@@ -9,7 +9,7 @@ development:
   port: 5432
   database: postgres
   username: postgres.eggagnxiurvlcgnvjkrd
-  password: 96gOEhPzwar5Cnfm
+  password: VAVdW7nXQdeC6zwa
 
 test:
   <<: *default
@@ -21,4 +21,4 @@ production:
   port: 5432
   database: postgres
   username: postgres.eggagnxiurvlcgnvjkrd
-  password: 96gOEhPzwar5Cnfm
+  password: VAVdW7nXQdeC6zwa
