@@ -1,0 +1,5 @@
+module SupabaseConstants
+  SUPABASE_URL = ENV.fetch("SUPABASE_URL")
+  SUPABASE_API_KEY = ENV.fetch("SUPABASE_API_KEY")
+  SUPABASE_JWKS_URL = ENV.fetch("SUPABASE_JWKS_URL")
+end

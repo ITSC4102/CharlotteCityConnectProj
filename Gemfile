@@ -61,3 +61,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# jwt for supabase token authentication
+gem "jwt"
+gem "faraday"
+
+gem 'dotenv-rails'

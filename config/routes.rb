@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  get "home/index"
+  get "home/index"  
+  root "home#index"
+
   get "users/new"
   get "users/create"
   get "events/index"
   get "events/show"
-  root "home#index"
 
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
