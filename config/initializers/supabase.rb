@@ -43,13 +43,13 @@ module SupabaseAuth
     # HTTP = 400, login failed
     when 400, 401
         # Bad credentials
-      Rails.logger.debug("Supabase 400/401: #{resp.body.inspect}")
-      msg = extract_msg(resp.body) || "Invalid login"
+      Rails.logger.debug("Supabase 400/401: #{response.body.inspect}")
+      msg = extract_msg(response.body) || "Invalid login"
       raise AuthenticationError, msg
     else
         # Connectivity or other unexpected errors
-      Rails.logger.warn("Supabase unexpected #{resp.status}: #{resp.body.inspect}")
-      raise ServiceError.new("Auth service error", status: resp.status, body: resp.body)
+      Rails.logger.warn("Supabase unexpected #{response.status}: #{response.body.inspect}")
+      raise ServiceError.new("Auth service error", status: response.status, body: response.body)
     end
   rescue Faraday::Error => e
     st  = e.respond_to?(:response) ? e.response&.dig(:status) : nil
@@ -80,22 +80,39 @@ module SupabaseAuth
     end
 
     # Sign up new user
-    def sign_up(email:, password:)
-        raise ArgumentError, "Email cannot be blank" if email.to_s.strip.empty?
-        raise ArgumentError, "Password cannot be blank" if password.to_s.strip.empty?
+      # Sign up new user
+  def sign_up(email:, password:)
+    raise ArgumentError, "Email cannot be blank" if email.to_s.strip.empty?
+    raise ArgumentError, "Password cannot be blank" if password.to_s.strip.empty?
 
-        begin
-            http.post("#{SUPABASE_URL}/auth/v1/signup") do |req|
-                req.headers["apikey"] = SUPABASE_API_KEY
-                req.headers["Content-Type"] = "application/json"
-                req.body = { email: email, password: password }.to_json
-            end
-        rescue Faraday::Error => e
-            raise AuthenticationError, "Sign up failed: #{e.message}"
-        rescue JSON::ParserError => e
-            raise AuthenticationError, "Invalid response format: #{e.message}"
-        end
+    response = http.post("/auth/v1/signup") do |req|
+      req.headers["apikey"]       = SUPABASE_API_KEY
+      req.headers["Content-Type"] = "application/json"
+      req.headers["Accept"]       = "application/json"
+      req.body = { email: email, password: password }
     end
+
+    case response.status
+    when 200, 201
+      # For now just return the parsed body (Hash)
+      # Depending on your Supabase settings this may or may not include access/refresh tokens.
+      return response.body
+    when 400, 401
+      Rails.logger.error("Supabase signup 400/401: #{response.body.inspect}")
+      msg = extract_msg(response.body) || "Sign up failed"
+      raise AuthenticationError, msg
+    else
+      Rails.logger.error("Supabase signup unexpected #{response.status}: #{response.body.inspect}")
+      raise ServiceError.new("Sign up service error", status: response.status, body: response.body)
+    end
+  rescue Faraday::Error => e
+    st  = e.respond_to?(:response) ? e.response&.dig(:status) : nil
+    bod = e.respond_to?(:response) ? e.response&.dig(:body)   : nil
+    raise ServiceError.new("Network/HTTP error: #{e.message}", status: st || 0, body: bod)
+  rescue JSON::ParserError => e
+    raise AuthenticationError, "Invalid response format: #{e.message}"
+  end
+
 
     # Key lookup using supabase_jwks.rb methods
     def public_key_for(kid)
