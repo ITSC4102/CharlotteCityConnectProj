@@ -8,3 +8,15 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: block !important;
+}
+
+body.home-home {
+  display: block !important;
+}

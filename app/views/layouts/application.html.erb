@@ -28,6 +28,65 @@
   </head>
 
   <body class="<%= controller.controller_name %>-<%= controller.action_name %>">
+  <!-- Navigation bar -->
+
+<header style="
+  width: 100%;
+  background-color: #004aad;
+  padding: 0.75rem 1.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1000;">
+
+  <!-- Left side: Logo + Links -->
+  <div style="display:flex; align-items:center; gap:2rem;">
+    
+    <!-- Logo / Brand -->
+    <div style="color:white; font-weight:700; font-size:1.3rem;">
+      Charlotte City Connect
+    </div>
+
+    <!-- Nav Links -->
+    <nav style="display:flex; align-items:center; gap:1rem;">
+      <%= link_to 'Home', root_path,
+          style: "color:white; text-decoration:none; font-weight:500;" %>
+      <%= link_to 'Events', events_path,
+          style: "color:white; text-decoration:none; font-weight:500;" %>
+      
+    </nav>
+  </div>
+
+  <!-- Right side: Auth Links -->
+  <div style="display:flex; align-items:center; gap:1rem;">
+    <% if signed_in? %>
+      <span style="color:white; font-weight:600;">
+        Hello, <%= current_user.name %>
+      </span>
+
+      <!--<%= link_to 'Log Out', logout_path,
+          method: :delete,
+          data: { confirm: 'Log out?' },
+          style: "color:white; text-decoration:none; font-weight:bold;" %> -->
+      <%= button_to 'Log Out', logout_path,
+              method: :delete,
+              data: { confirm: 'Log out?' },
+              class: "text-white font-bold px-2 py-1 bg-transparent border-0" %>
+    <% else %>
+      <%= link_to 'Log In', login_path,
+          style: "color:white; text-decoration:none; font-weight:bold;" %>
+
+      <%= link_to 'Sign Up', signup_path,
+          style: "color:white; text-decoration:none; font-weight:bold;" %>
+    <% end %>
+  </div>
+
+</header>
+
+
     <%= yield %>
   </body>
 </html>
