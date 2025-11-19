@@ -1,10 +1,16 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
-  # Show ONLY the events that belong to the current logged-in user
+
+  # Shows all events
   def index
-    @events = current_user.events
+    @events = Event.all.order(time: :asc)
+  end
+
+  # Show ONLY the events that belong to the current logged-in user
+  def my_events
+    @events = current_user.events.order(time: :asc)
   end
 
   def show
@@ -48,6 +54,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :description, :date, :location)
+    params.require(:event).permit(:id, :name, :attendees, :location, :time, :required_tags, :created_at, :description)
   end
 end

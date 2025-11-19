@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   get '/signup', to: 'users#new'
   post '/users', to: 'users#create'
+
   resources :events, only: [:index, :show]
-  # your other routes here
+  # route for just the current user's events
+  get "my_events", to: "events#my_events", as: :my_events
 end
