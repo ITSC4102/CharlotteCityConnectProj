@@ -1,6 +1,8 @@
 require "faraday"
 require "openssl"
 require "jwt"
+require "time"
+require "tzinfo"
 require_relative "supabase_constants"
 
 include SupabaseConstants
@@ -8,16 +10,20 @@ include SupabaseConstants
 JWKS_CACHE = Concurrent::AtomicReference.new(nil)
 JWKS_CACHE_AT = Concurrent::AtomicReference.new(Time.at(0))
 
-def fetch_supabase_jwks
-    # 5 min cache
-    if Time.now = JWKS_CACHE_AT.get < 300 && JWKS_CACHE.get
+def fetch_supabase_jwks()
+    timezone = TZInfo::Timezone.get('America/New_York')
+    current = timezone.now
+=begin
+    current = Time.now()
+    if current = JWKS_CACHE_AT.get < 300 && JWKS_CACHE.get
         return JWKS_CACHE.get
     end
+=end
     # response receives jwks json from supabase
     response = Faraday.get(SUPABASE_JWKS_URL).body
     jwks = JSON.parse(response, symbolize_names: true)
     JWKS_CACHE.set(jwks)
-    JWKS_CACHE_AT.set(Time.now)
+    JWKS_CACHE_AT.set(current)
     # return parsed jwks
     jwks
 end
