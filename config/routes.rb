@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
-  get "home/index"  
   root "home#home"
 
-  get "users/new"
-  get "users/create"
-  get "events/index"
-  get "events/show"
+  # USERS
+  get "/signup", to: "users#new"
+  post "/users", to: "users#create"
 
+  # SESSIONS
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  get '/signup', to: 'users#new'
-  post '/users', to: 'users#create'
 
+  # EVENTS
   resources :events, only: [:index, :show]
-  # route for just the current user's events
-  get "my_events", to: "events#my_events", as: :my_events
+  post "/events/:id/register", to: "events#register", as: :register_event
+  post "/events/:id/unregister", to: "events#unregister", as: :unregister_event
+
+  get "my_events", to: "events#my_events"
 end
