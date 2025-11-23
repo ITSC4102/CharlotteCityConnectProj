@@ -16,4 +16,7 @@ Rails.application.routes.draw do
   post "/events/:id/unregister", to: "events#unregister", as: :unregister_event
 
   get "my_events", to: "events#my_events"
+
+  get "/calendar", to: "events#calendar", as: :calendar
+
 end

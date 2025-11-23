@@ -1,0 +1,64 @@
+<!-- Page Header -->
+<header class="w-full flex justify-center mt-4">
+  <div class="max-w-3xl text-center">
+    <h1 class="text-4xl font-extrabold text-slate-900 mb-3">
+      My Event Calendar
+    </h1>
+    <p class="text-lg text-slate-600 mb-6">
+      Here are the events you've registered for.
+    </p>
+  </div>
+</header>
+
+<% if @events.any? %>
+
+  <div class="w-full max-w-5xl mx-auto px-4">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+
+      <% @events.each do |event| %>
+        <div class="border border-slate-200 rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition max-w-sm w-full">
+
+          <h2 class="text-xl font-semibold text-slate-900 mb-2">
+            <%= event.name %>
+          </h2>
+
+          <p class="text-sm text-slate-600 mb-1">
+            <strong>Date:</strong> <%= event.time&.strftime("%B %d, %Y") %>
+          </p>
+
+          <p class="text-sm text-slate-600 mb-1">
+            <strong>Time:</strong> <%= event.time&.strftime("%l:%M %p") %>
+          </p>
+
+          <p class="text-sm text-slate-600 mb-1">
+            <strong>Location:</strong> <%= event.location %>
+          </p>
+
+          <p class="text-sm text-slate-700 mt-3">
+            <%= truncate(event.description.to_s, length: 120) %>
+          </p>
+
+          <%= button_to "Remove Registration",
+                unregister_event_path(event),
+                method: :post,
+                class: "mt-4 inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold bg-red-600 text-white hover:bg-red-700 transition",
+                form: { style: "display:inline;" } %>
+
+        </div>
+      <% end %>
+
+    </div>
+
+  </div>
+
+<% else %>
+
+  <div class="text-center text-slate-500 mt-10">
+    <p>You haven’t registered for any events yet.</p>
+    <%= link_to "Browse Events",
+          events_path,
+          class: "inline-flex items-center justify-center mt-4 rounded-lg px-4 py-2 text-sm font-semibold bg-indigo-600 text-white hover:bg-indigo-700" %>
+  </div>
+
+<% end %>
