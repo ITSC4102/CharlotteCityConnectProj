@@ -1,0 +1,50 @@
+<h1>Create Event</h1>
+<p class="text-xs text-slate-500"> &nbsp </p>
+
+<%= form_with model: @event, local: true do |e| %>
+  <% if @event.errors.any? %>
+    <div class="text-red-600">
+      <% @event.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= e.label :name %>
+    <%= e.text_field :name %>
+    <p class="text-xs text-slate-500"> &nbsp </p>
+  </div>
+
+  <div>
+    <%= e.label :description %>
+    <%= e.text_field :description %>
+    <p class="text-xs text-slate-500"> &nbsp </p>
+  </div>
+
+  <div>
+    <%= e.label :location %>
+    <%= e.text_field :location %>
+    <p class="text-xs text-slate-500"> &nbsp </p>
+  </div>
+
+  <div>
+    <%= e.label :time %>
+    <%= e.datetime_select :time %>
+    <p class="text-xs text-slate-500"> &nbsp </p>
+  </div>
+
+  <div>
+    <%= e.label :attendees %>
+    <%= e.number_field :attendees %>
+    <p class="text-xs text-slate-500"> &nbsp </p>
+  </div>
+
+  <div>
+    <%= e.label :required_tags %>
+    <%= e.text_field :required_tags %>
+    <p class="text-xs text-slate-500"> &nbsp </p>
+  </div>
+
+  <%= e.submit "Create Event" %>
+<% end %>

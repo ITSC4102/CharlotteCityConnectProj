@@ -1,4 +1,4 @@
-class AddUserIdToEvents < ActiveRecord::Migration[8.0]
+class AddUserToEvents < ActiveRecord::Migration[8.0]
   def change
     add_reference :events, :user, null: true, foreign_key: true
   end

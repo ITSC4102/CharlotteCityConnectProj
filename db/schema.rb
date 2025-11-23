@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_19_031457) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_23_220208) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_19_031457) do
     t.text "required_tags"
     t.datetime "created_at", default: -> { "now()" }, null: false
     t.text "description"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,4 +52,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_19_031457) do
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
+  add_foreign_key "events", "users"
 end

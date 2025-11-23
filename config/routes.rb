@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   # EVENTS
-  resources :events, only: [:index, :show]
+  resources :events, only: [:index, :show, :new, :create]
   post "/events/:id/register", to: "events#register", as: :register_event
   post "/events/:id/unregister", to: "events#unregister", as: :unregister_event
 
