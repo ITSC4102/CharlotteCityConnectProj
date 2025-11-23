@@ -20,3 +20,11 @@ body {
 body.home-home {
   display: block !important;
 }
+
+.auth-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 4rem; /* Avoid header overlap */
+}

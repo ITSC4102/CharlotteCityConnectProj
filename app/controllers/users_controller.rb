@@ -7,8 +7,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to login_path, notice: "Account created successfully! Please log in."
+      session[:user_id] = @user.id  # auto login
+      redirect_to root_path, notice: "Account created successfully!"
     else
+      flash.now[:alert] = @user.errors.full_messages.join(", ")
       render :new, status: :unprocessable_entity
     end
   end

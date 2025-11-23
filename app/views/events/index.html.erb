@@ -7,95 +7,87 @@
     <p class="text-lg md:text-xl text-slate-600 mb-8">
       Discover what's happening around campus and in the Charlotte community.
     </p>
-    <p class="text-sm text-slate-600 mb-3">
-      &nbsp;&nbsp;&nbsp;
-    </p>
   </div>
 </header>
 
 <% if @events.any? %>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-    <% @events.each do |event| %>
-      <div class="flex flex-col justify-between h-full border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition duration-150 bg-white mb-10">
 
-        <!-- Event name and time -->
-        <div>
-          <h2 class="text-xl font-semibold text-slate-900 mb-1">
-            <%= event.name %>
-          </h2>
+  <!-- ⭐ NEW CONTAINER TO CENTER EVERYTHING ⭐ -->
+  <div class="w-full max-w-5xl mx-auto px-4">
 
-          <p class="text-sm text-slate-500 flex items-center gap-2 mb-2">
-            <span class="inline-block px-2 py-1 rounded-full bg-slate-100 text-xs font-medium">
-              <%= event.time&.strftime("%B %d, %Y") %>
-            </span>
-            <span class="text-xs">
-              • <%= event.time&.strftime("%l:%M %p") %>
-            </span>
-          </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+      <% @events.each do |event| %>
 
-          <!-- Location -->
-          <p class="text-sm text-slate-600 mb-3">
-            • <span class="font-medium"><%= event.location %></span>
-          </p>
+        <!-- Event Card -->
+        <div class="flex flex-col justify-between h-full border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition duration-150 bg-white mb-10 w-full max-w-sm">
 
-          <!-- Description -->
-          <p class="text-sm text-slate-700 mb-3">
-            • <%= truncate(event.description.to_s, length: 120) %>
-          </p>
+          <!-- Event name and time -->
+          <div>
+            <h2 class="text-xl font-semibold text-slate-900 mb-1">
+              <%= event.name %>
+            </h2>
 
-          <!-- Tags -->
-          <% tags = event.required_tags.to_s.split(",").map(&:strip).reject(&:blank?) %>
-          <% if tags.any? %>
-            <div class="flex flex-wrap gap-2 mb-3">
-              <% tags.each do |tag| %>
-                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
-                  • #<%= tag %>
-                </span>
-              <% end %>
-            </div>
-          <% end %>
-
-          <!-- Attendees -->
-          <% if event.attendees.present? %>
-            <p class="text-xs text-slate-500">
-              • <%= event.attendees %> expected attendees
+            <p class="text-sm text-slate-500 flex items-center gap-2 mb-2">
+              <span class="inline-block px-2 py-1 rounded-full bg-slate-100 text-xs font-medium">
+                <%= event.time&.strftime("%B %d, %Y") %>
+              </span>
+              <span class="text-xs">
+                • <%= event.time&.strftime("%l:%M %p") %>
+              </span>
             </p>
-          <% end %>
+
+            <p class="text-sm text-slate-600 mb-3">
+              • <span class="font-medium"><%= event.location %></span>
+            </p>
+
+            <p class="text-sm text-slate-700 mb-3">
+              • <%= truncate(event.description.to_s, length: 120) %>
+            </p>
+
+            <% tags = event.required_tags.to_s.split(",").map(&:strip).reject(&:blank?) %>
+            <% if tags.any? %>
+              <div class="flex flex-wrap gap-2 mb-3">
+                <% tags.each do |tag| %>
+                  <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
+                    • #<%= tag %>
+                  </span>
+                <% end %>
+              </div>
+            <% end %>
+
+            <% if event.attendees.present? %>
+              <p class="text-xs text-slate-500">
+                • <%= event.attendees %> expected attendees
+              </p>
+            <% end %>
+          </div>
+
+          <!-- Buttons -->
+          <div class="mt-4 flex justify-center">
+
+            <% if current_user&.reg_events&.include?(event.id) %>
+              <%= button_to "Remove Registration",
+                  unregister_event_path(event),
+                  method: :post,
+                  form: { style: "display:inline;" },
+                  class: "inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold bg-red-600 text-white hover:bg-red-700 transition"
+              %>
+
+            <% else %>
+              <%= button_to "Register",
+                  register_event_path(event),
+                  method: :post,
+                  form: { style: "display:inline;" },
+                  class: "inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold bg-indigo-600 text-white hover:bg-indigo-700 transition"
+              %>
+            <% end %>
+
+          </div>
+
         </div>
+      <% end %>
+    </div>
 
-        <!-- Register Button Section -->
-<div class="mt-4 flex justify-center">
-
-  <% if current_user&.reg_events&.include?(event.id) %>
-
-    <!-- Unregister Button -->
-    <%= button_to "Remove Registration",
-        unregister_event_path(event),
-        method: :post,
-        form: { class: "inline-block w-auto" },
-        class: "inline-flex w-fit items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold bg-red-600 text-white hover:bg-red-700 transition" %>
-
-  <% else %>
-
-    <!-- Register Button -->
-    <%= button_to "Register",
-        register_event_path(event),
-        method: :post,
-        form: { class: "inline-block w-auto" },
-        class: "inline-flex w-fit items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold bg-indigo-600 text-white hover:bg-indigo-700 transition" %>
-
-  <% end %>
-
-</div>
-
-
-      </div>
-
-      <p class="text-sm text-slate-600 mb-3">
-        &nbsp;&nbsp;&nbsp;
-      </p>
-
-    <% end %>
   </div>
 
 <% else %>
