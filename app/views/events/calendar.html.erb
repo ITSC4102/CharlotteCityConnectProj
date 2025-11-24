@@ -10,6 +10,36 @@
     <p class="text-xs text-slate-500"> &nbsp </p>
   </div>
 </header>
+<!-- Conflict Alert Section -->
+<% if @conflicts.any? %>
+  <div class="w-full max-w-3xl mx-auto mb-6 bg-red-100 border border-red-300 rounded-lg p-4">
+    <h2 class="text-lg font-semibold text-red-800 mb-2">⚠ Scheduling Conflicts Detected</h2>
+
+    <% @conflicts.each do |c| %>
+      <p class="text-red-700 text-sm mb-2">
+        <strong><%= c[:event1].name %></strong>
+        (<%= c[:event1].time.strftime("%b %d, %l:%M %p") %>)
+        overlaps with
+        <strong><%= c[:event2].name %></strong>
+        (<%= c[:event2].time.strftime("%b %d, %l:%M %p") %>)
+      </p>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @distances.any? %>
+  <div class="mb-6 p-4 bg-yellow-50 border border-yellow-300 rounded-lg">
+    <h3 class="font-bold text-lg text-yellow-800 mb-2">Travel Time Notes</h3>
+
+    <% @distances.each do |info| %>
+      <p class="text-sm text-yellow-700">
+        <strong><%= info[:event1].name %></strong> → <strong><%= info[:event2].name %></strong>  
+        is <%= info[:distance_miles] %> miles away  
+        (<%= info[:duration_minutes] %> min drive)
+      </p>
+    <% end %>
+  </div>
+<% end %>
 
 <% if @events.any? %>
 
