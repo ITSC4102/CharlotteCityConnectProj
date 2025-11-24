@@ -39,12 +39,12 @@
       <% @events.each do |event| %>
 
         <!-- Event Card -->
-        <div class="flex flex-col justify-between h-full border border-slate-200 rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition duration-150 bg-white mb-10 w-full max-w-sm">
+        <div class="event-card w-full max-w-sm mb-8">
 
           <!-- Event name and time -->
           <div>
-            <h2 class="text-xl font-semibold text-slate-900 mb-1">
-              <%= event.name %>
+            <h2 style="color: #004aad; font-size: 1.5rem; margin-bottom: 1rem;"> 
+              <%=event.name %>
             </h2>
 
             <p class="text-sm text-slate-500 flex items-center gap-2 mb-2">
@@ -80,6 +80,9 @@
                 • <%= event.attendees %> expected attendees
               </p>
             <% end %>
+            <p class="text-xs text-slate-500">
+              &nbsp
+              </p>
           </div>
 
           <!-- Buttons -->

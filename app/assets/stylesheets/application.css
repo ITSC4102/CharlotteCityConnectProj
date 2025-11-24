@@ -28,3 +28,11 @@ body.home-home {
   width: 100%;
   padding-top: 4rem; /* Avoid header overlap */
 }
+
+.event-card {
+  background-color: #ffffff;
+  border: 4px solid #004aad;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+  padding: 1.5rem; 
+}

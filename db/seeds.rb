@@ -29,16 +29,25 @@ Event.create!(
   name: "Coffee & Munchkins Morning!",
   attendees: 40,
   location: "Greek Village House 10",
-  time: DateTime.new(2025, 24, 11, 8, 0, 0 ),
+  time: DateTime.new(2025, 11, 24, 8, 0, 0 ),
   required_tags: "",
   description: "Come enjoy fresh-brewed coffee (hotor iced Americanos) and Dunkin' Munchkins — our treat to you!",
+)
+
+Event.create!(
+  name: "Finals Study Cart",
+  attendees: 0,
+  location: "Belk Hall",
+  time: DateTime.new(2025, 11, 24, 8, 0, 0),
+  required_tags: "",
+  description: "Delivering study supplies to help de-stress! :)",
 )
 
 Event.create!(
   name: "Hot Chocolate Fundraiser for FIRST Robotics",
   attendees: 12,
   location: "Union Front Porch",
-  time: DateTime.new(2025, 24, 11, 12, 0, 0),
+  time: DateTime.new(2026, 1, 12, 12, 0, 0),
   required_tags: "",
   description: "Sisters of Alpha Omega Epsilon hosted a hot chocolate fundraiser to support our philanthropy efforts.",
 )
@@ -47,16 +56,7 @@ Event.create!(
   name: "Comedy Night",
   attendees: 18,
   location: "Friday Hall 132",
-  time: DateTime.new(2025, 24, 11, 6, 0, 0),
+  time: DateTime.new(2025, 1, 25, 6, 0, 0),
   required_tags: "",
   description: "De-stress before exam season with Pakka Telugu for an hour of iconic Tollywood Comedy Scenes!",
-)
-
-Event.create!(
-  name: "Finals Study Cart",
-  attendees: 0,
-  location: "Belk Hall",
-  time: DateTime.new(2025, 24, 11, 8, 0, 0),
-  required_tags: "",
-  description: "Delivering study supplies to help de-stress! :)",
 )
