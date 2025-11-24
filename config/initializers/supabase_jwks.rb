@@ -3,7 +3,7 @@ require "openssl"
 require "jwt"
 require "time"
 require "tzinfo"
-require_relative "supabase_constants"
+# require_relative "supabase_constants"
 
 include SupabaseConstants
 # Store JWK cache data from supabase wth timestamp

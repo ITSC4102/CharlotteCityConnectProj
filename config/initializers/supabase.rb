@@ -1,10 +1,10 @@
 require "faraday"
 require "jwt"
 require "json"
-require_relative "supabase_constants"
-require_relative "supabase_jwks"
+# require_relative "supabase_constants"
+# require_relative "supabase_jwks"
 
-include SupabaseConstants
+# include SupabaseConstants
 
 module SupabaseAuth
   # Classes and methods to handle errors    
